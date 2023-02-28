@@ -1,9 +1,21 @@
+import 'dart:convert';
+
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
-  //TODO: Implement HomeController
+  List _categori = [];
 
-  final count = 0.obs;
+  Future<void> readJson() async {
+    final String response = await rootBundle.loadString('api/categori.json');
+    final data = await json.decode(response);
+    @override
+    void initState() {
+      // Call the readJson method when the app starts
+      readJson();
+    }
+  }
+
   @override
   void onInit() {
     super.onInit();
@@ -18,6 +30,4 @@ class HomeController extends GetxController {
   void onClose() {
     super.onClose();
   }
-
-  void increment() => count.value++;
 }
